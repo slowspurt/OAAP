@@ -14,7 +14,7 @@ coverage/
 .codex/
 
 # Internal planning, verification, and team coordination
-AGENTS.md
+/AGENTS.md
 *.ko.md
 docs/team/
 

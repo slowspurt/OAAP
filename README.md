@@ -13,6 +13,19 @@ dashboard.
 > receiver logic has automated test coverage, but the live
 > AI-to-Apps-Script-to-Sheets path has not yet been verified end to end.
 
+## Use the proof of concept
+
+- Read the [OAAP 0.1 protocol and receiver contract](docs/PROTOCOL.md).
+- Follow the [maintainer setup guide](docs/SETUP.md).
+- Merge the [repository adoption templates](templates/repository/) into an
+  existing project's instructions without overwriting them.
+- Copy the [maintainer spreadsheet template](templates/sheets/OAAP-maintainer-template.xlsx)
+  into the maintainer's Google account.
+- Deploy the [Apps Script receiver](receiver/Code.gs), then follow the
+  [receiver verification guide](receiver/VERIFY.md).
+- Use the [demo client](scripts/demo-client.mjs) and
+  [local test suite](tests/) to inspect the supported path and failure handling.
+
 ## The agreement
 
 OAAP adoption and agent participation are voluntary. Once an AI agent
@@ -70,10 +83,15 @@ user action.
 
 ## Project status
 
-The initial public repository is being assembled. The protocol, repository
-templates, maintainer-owned receiver, sheet template, setup guide, reproducible
-demo, and verification evidence will be published and versioned here as they are
-reviewed. Until then, treat OAAP as a proof of concept and do not claim live
-receiver verification or broad AI-client compatibility.
+This repository contains the reviewed 0.1 protocol, adoption templates,
+maintainer-owned sheet and receiver, setup guidance, demo client, and local test
+suite. Current local verification covers 23 passing tests: 16 receiver-contract
+tests and 7 demo/E2E tests. They exercise the actual receiver source and local
+HTTP/Git flows while mocking Google services.
+
+The live AI-to-Apps-Script-to-Sheets path remains unverified because Google
+authorization and deployment verification are still pending. Do not claim live
+receiver verification, native Google concurrency guarantees, or broad AI-client
+compatibility from the local results.
 
 Questions and implementation feedback are welcome through GitHub Issues.
