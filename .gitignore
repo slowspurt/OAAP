@@ -1,0 +1,23 @@
+# Dependencies and build artifacts
+node_modules
+outputs/
+dist/
+coverage/
+
+# Local configuration, credentials, and deployment identifiers
+.env
+.env.*
+!.env.example
+.clasp.json
+.clasprc.json
+*.local.json
+.codex/
+
+# Internal planning, verification, and team coordination
+AGENTS.md
+*.ko.md
+docs/team/
+
+# Local logs and operating-system files
+*.log
+.DS_Store

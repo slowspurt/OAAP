@@ -1,0 +1,1 @@
+A maintainer-owned protocol and adoption kit for responsible AI access to open source—without a central OAAP server or hosted dashboard.
