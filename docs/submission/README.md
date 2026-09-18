@@ -15,9 +15,9 @@ submission or a claim that a particular competition's rules have been met.
 | --- | --- |
 | Protocol and implementation | Available in the repository; design and code evidence. |
 | Local automated verification | 23 passing tests reported in the receiver's 2026-09-15 run: 16 receiver cases and 7 demo cases. The protocol reviewer independently ran the 16 receiver tests. Google services are mocked. |
-| Native Google text storage | Operator-reported failure: a leading apostrophe was removed in a tested RichText write; the exact retry failed. Two synthetic pending receipts remain from the interrupted check. Fix/retest evidence pending. |
+| Native Google text storage | Initial leading-apostrophe failure corrected. Six native cases passed; the editor checked API exact strings/no-formula values and Summary 8/0/0/8/0. Eight pending receipts include the first failed run's two; no downloads were performed. |
 | Live Google HTTP receiver | Current deployment/HTTP verification pending. The native check is not an HTTP test. |
-| Independent live Records / Summary readback | Baseline and two pending test receipts reported by the operator; reconciled post-fix and HTTP-run evidence pending. |
+| Independent live Records / Summary readback | Native-run API readback independently checked: eight pending demo receipts. HTTP-run reconciliation remains pending. |
 | Public screenshots | None accepted into this package yet. Old template renders and authorization screenshots are not successful end-to-end evidence. |
 | Usage-feedback relay | Implemented as a synthetic demo output; live delivery evidence pending. A request is not a user response or a stored feedback record. |
 | Customer validation | Not established. Initial feedback relayed by the project owner motivates continued attention to usage feedback; no interview count, transcript, or outcome metric is available. |

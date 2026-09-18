@@ -23,9 +23,10 @@ export function fixture(options = {}) {
           for (let j = 0; j < w; j++) {
             const value = values[i][j];
             // Deliberately reject raw formula-like setValues writes. Number format
-            // alone is not evidence of safety. RichText preserves exact strings.
+            // alone is not evidence of safety. Native RichText strips one leading
+            // apostrophe, observed in Google on 2026-09-18.
             if (!rich && typeof value === 'string' && value.startsWith('=')) throw new Error('unsafe_formula_write');
-            data[row + i - 1][col + j - 1] = rich ? value.text : value;
+            data[row + i - 1][col + j - 1] = rich ? (value.text.startsWith("'") ? value.text.slice(1) : value.text) : value;
           }
         }
       };

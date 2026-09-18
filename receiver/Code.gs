@@ -50,12 +50,12 @@ function doPost(e) {
       sheet.getRange(next, 2, 1, 7).setNumberFormat('@');
       sheet.getRange(next, 10, 1, 2).setNumberFormat('@');
       sheet.getRange(next, 1).setNumberFormat('yyyy-mm-dd hh:mm:ss');
-      // RichText writes literal text without formula parsing or apostrophe escaping.
+      // RichText avoids formula parsing; escape its leading-apostrophe marker.
       // Never accept either raw OR escaped text as an identical retry.
       sheet.getRange(next, 1, 1, 3).setValues([[new Date(), request.event_id, request.repository]]);
       sheet.getRange(next, 4, 1, 2).setRichTextValues([[
-        SpreadsheetApp.newRichTextValue().setText(request.agent).build(),
-        SpreadsheetApp.newRichTextValue().setText(request.final_prompt).build()
+        richText_(request.agent),
+        richText_(request.final_prompt)
       ]]);
       SpreadsheetApp.flush();
       // Commit last. A staging row has no source and is excluded by Summary.
@@ -102,6 +102,12 @@ function validate_(r) {
     if (Object.keys(r).some(k => !allowed.includes(k))) throw new Error('invalid_fields');
   }
   return r;
+}
+
+function richText_(s) {
+  // Native Sheets removes one leading apostrophe, even for RichTextValue.
+  // Double that marker to preserve the exact original (verified by native smoke).
+  return SpreadsheetApp.newRichTextValue().setText(s.startsWith("'") ? "'" + s : s).build();
 }
 
 function hash_(s) {

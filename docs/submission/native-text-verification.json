@@ -1,0 +1,79 @@
+{
+  "type": "derived_verification_summary",
+  "scope": "Native Google text storage; not public HTTP or download verification",
+  "source": "demo",
+  "native_execution_utc": {
+    "start": "2026-09-18T11:57:38Z",
+    "end": "2026-09-18T11:57:55Z"
+  },
+  "basis": "Editor checked retained Google API readback and native execution completion capture; duplicate/conflict checks are assertions in the completed native helper. Raw files remain private.",
+  "first_failed_run_receipts": 2,
+  "corrected_run_receipts": 6,
+  "total_receipts_at_readback": 8,
+  "summary": {
+    "Access requests": 8,
+    "Downloads succeeded": 0,
+    "Downloads failed": 0,
+    "Awaiting result": 8,
+    "Anonymized prompts": 0
+  },
+  "samples": [
+    {
+      "row": 4,
+      "synthetic_input": "=1+1",
+      "agent_exact": true,
+      "prompt_exact": true,
+      "formula_present": false,
+      "download_status": "pending",
+      "source": "demo"
+    },
+    {
+      "row": 5,
+      "synthetic_input": "'=1+1",
+      "agent_exact": true,
+      "prompt_exact": true,
+      "formula_present": false,
+      "download_status": "pending",
+      "source": "demo"
+    },
+    {
+      "row": 6,
+      "synthetic_input": "''=1+1",
+      "agent_exact": true,
+      "prompt_exact": true,
+      "formula_present": false,
+      "download_status": "pending",
+      "source": "demo"
+    },
+    {
+      "row": 7,
+      "synthetic_input": "\t=1+1",
+      "agent_exact": true,
+      "prompt_exact": true,
+      "formula_present": false,
+      "download_status": "pending",
+      "source": "demo"
+    },
+    {
+      "row": 8,
+      "synthetic_input": "'ordinary text",
+      "agent_exact": true,
+      "prompt_exact": true,
+      "formula_present": false,
+      "download_status": "pending",
+      "source": "demo"
+    },
+    {
+      "row": 9,
+      "synthetic_input": "Ordinary 한글 prompt\nwith newline",
+      "agent_exact": true,
+      "prompt_exact": true,
+      "formula_present": false,
+      "download_status": "pending",
+      "source": "demo"
+    }
+  ],
+  "http_verified": false,
+  "download_performed": false,
+  "public_screenshot_available": false
+}

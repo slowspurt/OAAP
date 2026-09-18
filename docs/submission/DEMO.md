@@ -18,10 +18,10 @@ perform a scripted result as if it were spontaneous customer behavior.
 
 The operator reports that the first native Google text check failed after two
 synthetic pending receipts: a leading apostrophe was not preserved, and the
-exact retry failed. Show this as a limitation found by live testing, not as a
-passed check. Follow the [finding and retest status](NATIVE_FINDING.md); include
-those pending receipts in the next Summary baseline. No download occurred in
-that native text check.
+exact retry failed. The corrected six-case rerun passed, with independently checked API text and
+Summary readback. Present the first failure and the verified correction as
+separate steps. Follow the [finding and retest status](NATIVE_FINDING.md): the
+current baseline has eight pending native receipts and no download outcomes.
 
 ## If live evidence is not available
 

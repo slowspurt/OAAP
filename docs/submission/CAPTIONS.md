@@ -49,10 +49,12 @@ screenshots, facts about a run, or instructions to alter a screen.
 The receiver owner reported 23 passing local tests: 16 receiver cases and
 7 demo cases, including real local Git clones and loopback HTTP. Google services
 were mocked. The protocol reviewer independently reran the 16 receiver cases.
-The operator reports a native Google leading-apostrophe preservation failure
-that the local mocks did not detect. Fix/retest, deployed HTTP verification, and
-publishable captures are pending; two pending native-test receipts are part of
-the next run's baseline. See [the native finding](NATIVE_FINDING.md).
+The first native Google check exposed a leading-apostrophe preservation failure.
+After correction, six native cases passed; the editor independently checked exact
+API strings, absence of formulas, and eight pending receipts (two from the first
+run plus six from the corrected run). This native check performed no downloads.
+Deployed HTTP verification and public captures remain pending. See
+[the native finding](NATIVE_FINDING.md).
 
 Keep usage feedback central. Star-request value is under review, not confirmed
 removed. Do not add testimonials, customer counts, feedback collection metrics,

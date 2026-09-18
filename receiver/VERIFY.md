@@ -30,8 +30,11 @@ The receiver writes free text using the documented
 [RichTextValue builder](https://developers.google.com/apps-script/reference/spreadsheet/rich-text-value-builder)
 and [Range.setRichTextValues](https://developers.google.com/apps-script/reference/spreadsheet/range)
 APIs. `setValues` can interpret strings beginning with `=` as formulas; plain-text
-number formatting alone is not the safety mechanism. Native-runtime testing is
-still required to establish exact behavior in the installed deployment.
+number formatting alone is not the safety mechanism. The corrected six-sample native test passed on 2026-09-18 in the maintainer
+verification sheet. The first run exposed Google removing one leading apostrophe
+even from RichText; the writer now doubles only that leading marker to preserve
+the original text. Duplicate comparisons remain exact. Verify this behavior in
+your own installed deployment; local mocks alone did not detect it.
 
 ## Actual HTTP and local download flow
 
@@ -76,10 +79,10 @@ observed README use; it does not star, review, or contact anyone.
 
 Upload the current `Code.gs` and update the deployed Apps Script version after
 receiver changes. The optional smoke helper is not needed for normal reception.
-This revision preserves the 11-column and JSON contracts. It replaces apostrophe
-escaping with exact RichText storage, so deployments containing records from an
-older escaped writer need a separately reviewed migration before claiming exact
-retry compatibility for those old records. Do not silently strip apostrophes
+This revision preserves the 11-column and JSON contracts. It uses RichText with
+a leading-apostrophe marker escape for exact text storage. Deployments containing
+records from an older writer need a separately reviewed migration before claiming
+exact retry compatibility for those old records. Do not silently strip apostrophes
 from existing prompts.
 
 The receiver holds a script lock through reads, writes and flushes. It prepares

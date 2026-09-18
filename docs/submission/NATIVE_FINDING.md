@@ -1,6 +1,6 @@
 # Native Google test finding
 
-Status: **native failure confirmed in a private capture; candidate fix implemented; native retest pending**. Recorded
+Status: **native fix verified for the six tested samples; deployed HTTP verification pending**. Recorded
 2026-09-18. This report distinguishes source inspection, local test results,
 operator observations, and independently accepted public captures.
 
@@ -8,6 +8,7 @@ operator observations, and independently accepted public captures.
 
 The receiver operator reported a native Apps Script text-storage check against
 Google Sheets after uploading the current receiver and optional smoke helper.
+The failed run started at 11:55:18 UTC and ended at 11:55:23 UTC on 2026-09-18.
 The `=1+1` sample passed the exact-text, no-formula, and changed-retry checks.
 The next sample, `'=1+1`, exposed removal of a leading apostrophe in the RichText
 storage path, and its identical retry failed. The check stopped at that point.
@@ -23,7 +24,7 @@ shows `literal_smoke_failed` at the identical-retry assertion. The exact
 stored-string diagnosis and two-row count are attributed to the operator's API readback. The capture contains an account avatar and is not approved
 for public use. No privacy-safe public image has been accepted yet.
 
-## Fix: status
+## Fix: implemented and checked
 
 The receiver owner updated the local adapter to model the observed removal of
 one leading apostrophe. The owner reports that this exposed two failures in
@@ -33,25 +34,39 @@ is unchanged. The submission editor inspected this change in `richText_` and
 the corresponding adapter behavior.
 
 The receiver owner reports all 23 local tests passing after the fix and an
-exact-match upload of the corrected code. Native retesting is in progress.
-Passing the adjusted local tests is not sufficient to declare this native issue
-resolved. No wire fields or feedback contract were changed.
+exact-match upload of the corrected code. The native rerun completed from
+11:57:38 to 11:57:55 UTC on 2026-09-18. The editor inspected its completion
+capture and independently checked the retained API readback. No wire fields
+or feedback contract were changed.
 
-## Verification: still required
+## Verification: observed result and remaining scope
 
-1. Re-run the affected leading-apostrophe cases in native Google with exact
-   `getValues()` text and empty `getFormulas()` results for tested text cells.
-2. Confirm identical retries succeed without duplicate committed rows and changed
-   apostrophe inputs are rejected as conflicts.
-3. Reconcile the two pending receipts from the failed run, any new native-test
-   receipts, and the separate HTTP demo. A complete six-case retest would
-   bring pending receipts to eight; a later three-event clone demo would bring
-   total receipts to eleven. These are expected reconciliation targets, not
-   observed results. Do not hide the failed check by treating
-   the next run as if its baseline were empty.
-4. Verify the corrected deployed HTTP path separately from native execution,
-   then independently read matching Records and Summary values.
-5. Capture authentic, privacy-safe app regions and record their test scope.
+The corrected native helper completed its six synthetic cases: `=1+1`, one and
+two leading apostrophes, a leading tab, a quoted ordinary string, and Korean
+text with a newline. Its assertions cover exact agent/prompt readback, no
+formulas, identical retries, and changed-apostrophe conflicts in both fields.
+The editor independently checked the API's `userEnteredValue` and
+`effectiveValue` strings for Records rows 4–9 and the absence of formula values.
+
+[Machine-readable verification summary](native-text-verification.json) contains
+only the checked synthetic samples, public test times, and aggregate results.
+It is a derived evidence summary, not a screenshot or a raw API response.
+
+| Stage | New receipts | Cumulative pending | Download results |
+| --- | --- | --- | --- |
+| First native run, stopped on failure | 2 | 2 | None |
+| Corrected native run | 6 | 8 | None |
+
+The retained Summary readback is **8 access requests, 0 succeeded, 0 failed,
+8 awaiting result, 0 anonymized prompts**. The first two rows remain intact;
+the problematic old row was not silently repaired. This demonstrates the fix
+for new tested writes, not migration of old records.
+
+Still pending: corrected public HTTP deployment verification, the three-event
+clone demo, independent post-demo Records/Summary reconciliation, and clean
+public captures. If the three-event demo later succeeds as intended, the total
+would become eleven with two successful and one failed download, plus eight
+pending native receipts. Those are expected future totals, not current results.
 
 ## What the local tests mean
 

@@ -125,15 +125,16 @@ service.
 | Receiver contract | 16 local tests against the actual `Code.gs` source through a local adapter | Passing |
 | Demo and failure paths | 7 local tests using loopback HTTP and real local Git operations | Passing |
 | Google authorization | Maintainer authorization completed | Complete |
-| Native Google text storage | The first native check exposed a leading-apostrophe preservation failure that local mocks did not detect | Fix and retest in progress |
+| Native Google text storage | An initial leading-apostrophe failure was corrected; six synthetic samples then passed exact-value and no-formula checks | Passed for the six tested samples |
 | Current Apps Script deployment → HTTP → Records/Summary | Requires deployment of the current receiver and independent sheet readback | Not yet verified in public evidence |
 | Universal AI discovery | Repository guidance is not automatically read by every AI or Git client | Not claimed |
 
-The 23 passing local tests mock Google services. They do not establish native
-Sheets behavior, distributed Google concurrency, or broad AI-client compatibility.
-Live evidence should be evaluated separately from local evidence. See the
-[native Google finding](docs/submission/NATIVE_FINDING.md) for the observed
-failure, its limits, and the required retest.
+The 23 passing local tests mock Google services. Native testing separately found
+the leading-apostrophe issue, and the corrected six-sample check passed with
+independently reviewed API values. This does not verify the public HTTP path,
+download demo, distributed Google concurrency, or broad AI-client compatibility.
+See the [native Google finding](docs/submission/NATIVE_FINDING.md) and its
+[derived verification summary](docs/submission/native-text-verification.json).
 
 ## Limits
 
