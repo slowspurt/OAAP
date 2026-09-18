@@ -1,6 +1,6 @@
 # Native Google test finding
 
-Status: **native fix verified for the six tested samples; deployed HTTP verification pending**. Recorded
+Status: **native fix and one deployed HTTP run verified; broader HTTP/demo evidence remains scoped**. Recorded
 2026-09-18. This report distinguishes source inspection, local test results,
 operator observations, and independently accepted public captures.
 
@@ -22,7 +22,9 @@ represented by these tests.
 The submission editor inspected the private raw capture: its execution log
 shows `literal_smoke_failed` at the identical-retry assertion. The exact
 stored-string diagnosis and two-row count are attributed to the operator's API readback. The capture contains an account avatar and is not approved
-for public use. No privacy-safe public image has been accepted yet.
+for public use. Two later, directly clipped app-region captures of Summary
+and Records were inspected and accepted without pixel editing; see the
+[evidence package](README.md#authentic-native-run-captures).
 
 ## Fix: implemented and checked
 
@@ -62,11 +64,15 @@ The retained Summary readback is **8 access requests, 0 succeeded, 0 failed,
 the problematic old row was not silently repaired. This demonstrates the fix
 for new tested writes, not migration of old records.
 
-Still pending: corrected public HTTP deployment verification, the three-event
-clone demo, independent post-demo Records/Summary reconciliation, and clean
-public captures. If the three-event demo later succeeds as intended, the total
-would become eleven with two successful and one failed download, plus eight
-pending native receipts. Those are expected future totals, not current results.
+The corrected deployment's public HTTP run is now separately verified in
+[http-demo-verification.json](http-demo-verification.json): three synthetic
+access/result pairs, two successful local-fixture clones, one deliberate failed
+clone, duplicate acknowledgements, and independent Summary/Records readback.
+The native Summary/Records captures remain a pre-HTTP view with eight pending
+receipts; they are not the post-run screen. The later HTTP run independently
+read back **11 access requests, 2 succeeded, 1 failed, 8 pending, and 1
+anonymized** after adding two successful and one failed local-fixture outcome.
+These are synthetic demo totals, not customer or GitHub-wide results.
 
 ## What the local tests mean
 

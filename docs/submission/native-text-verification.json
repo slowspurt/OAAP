@@ -75,5 +75,14 @@
   ],
   "http_verified": false,
   "download_performed": false,
-  "public_screenshot_available": false
+  "public_screenshot_available": true,
+  "public_captures": [
+    "../../assets/submission/native-summary-before-http.jpg",
+    "../../assets/submission/native-literal-records.jpg"
+  ],
+  "capture_caveats": [
+    "Summary As of label still reads 2026-09-15; native test ran 2026-09-18.",
+    "Records capture shows columns A:E only; exact strings/no-formula assertions are established by retained API readback and native helper, not pixels alone.",
+    "Synthetic event IDs are clipped by existing column widths."
+  ]
 }

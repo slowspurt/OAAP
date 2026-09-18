@@ -10,8 +10,9 @@ Each adopting maintainer owns the receiver, records, and operating choices.
 
 > [!IMPORTANT]
 > OAAP 0.1 is an experimental proof of concept, not a released standard.
-> Local tests are complete for the current implementation. Public evidence for
-> the live Apps-Script-to-Sheets path is still pending.
+> Local tests are complete for the current implementation. One synthetic run
+> also verified the deployed Apps-Script-to-Sheets path; this is not customer
+> adoption, an independent maintainer installation, or a GitHub-wide metric.
 
 ## Why OAAP
 
@@ -126,15 +127,21 @@ service.
 | Demo and failure paths | 7 local tests using loopback HTTP and real local Git operations | Passing |
 | Google authorization | Maintainer authorization completed | Complete |
 | Native Google text storage | An initial leading-apostrophe failure was corrected; six synthetic samples then passed exact-value and no-formula checks | Passed for the six tested samples |
-| Current Apps Script deployment → HTTP → Records/Summary | Requires deployment of the current receiver and independent sheet readback | Not yet verified in public evidence |
+| Current Apps Script deployment → HTTP → Records/Summary | Deployed version 1 accepted three synthetic access/result flows and identical retries; independent API readback reconciled 11 access, 2 succeeded, 1 failed, 8 pending, and 1 anonymized | Passed for one synthetic run |
 | Universal AI discovery | Repository guidance is not automatically read by every AI or Git client | Not claimed |
 
 The 23 passing local tests mock Google services. Native testing separately found
 the leading-apostrophe issue, and the corrected six-sample check passed with
-independently reviewed API values. This does not verify the public HTTP path,
-download demo, distributed Google concurrency, or broad AI-client compatibility.
+independently reviewed API values. A later deployed run used real HTTP and a
+synthetic local Git fixture: two clone scenarios succeeded, one deliberately
+failed, and duplicate retries added no extra rows. Its feedback request was demo
+output after observed fixture use; no user response or collected feedback is
+claimed. These checks do not establish independent maintainer installation,
+distributed Google concurrency, broad AI-client compatibility, or GitHub-wide
+download measurement.
 See the [native Google finding](docs/submission/NATIVE_FINDING.md) and its
-[derived verification summary](docs/submission/native-text-verification.json).
+[derived verification summary](docs/submission/native-text-verification.json),
+plus the [sanitized HTTP demo summary](docs/submission/http-demo-verification.json).
 
 ## Limits
 

@@ -12,7 +12,7 @@ tabs. This list is a capture request, not a statement that the checks passed.
 | Anonymized example | Meaningful prepared synthetic prompt and `anonymized` treatment. | State that the example is prewritten; do not expose a real private original or claim measured anonymization quality. |
 | Receipt vs outcome | Same event before result (`pending`) and after observed download (`succeeded`), or real acknowledgements with independent row confirmation. | Record actual clone observation separately. Do not recreate a “before” screen after the fact. |
 | Failure and retry | A distinct failed attempt, and one committed row for each repeated event. | Actual failure observation plus duplicate acknowledgements and row-count check. |
-| Summary | Visible `demo` source selection and verified counts for the observed run. | Before/after counts; include partial native runs (two pending receipts reported from the first failure) and subsequent retests. Never replace observed values with expected ones. |
+| Summary | Visible `demo` source selection and verified counts for the observed run. | Native baseline is 8/0/0/8/0; the later HTTP run read back 11/2/1/8/1. Include the partial native run and reconcile the three new HTTP rows. Never replace observed values with expected ones. |
 | Literal-text safety | Native smoke output or equivalent real `getValues`/`getFormulas` inspection. | Exact string preservation, no formulas, changed-apostrophe conflicts. HTTP success alone is insufficient. |
 | Feedback request | Authentic output or user-visible communication relaying the request after observed use. | Say whether it is demo output only or actually delivered in a conversation. Do not manufacture a response or imply collection. |
 
@@ -39,6 +39,7 @@ tabs. This list is a capture request, not a statement that the checks passed.
 - [ ] Deployed revision and test scope are identified in the operator's evidence.
 - [ ] Visible state matches corresponding acknowledgements and row observations.
 - [ ] Counts account for pre-existing rows, interrupted native runs, and subsequent smoke receipts.
+- [x] One deployed synthetic HTTP run has independent acknowledgement and sheet-readback evidence; it remains separate from GitHub-wide or customer evidence.
 - [ ] No account identifiers, private URLs, endpoints, credentials, or local paths remain.
 - [ ] Text is readable at normal display size; the caption adds no unsupported claim.
 - [ ] Source is labeled synthetic demo, and local vs Google verification is explicit.

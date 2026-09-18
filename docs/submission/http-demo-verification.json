@@ -1,0 +1,77 @@
+{
+  "type": "derived_verification_summary",
+  "scope": "Deployed Google Apps Script HTTP plus synthetic local Git fixture",
+  "run_utc": {
+    "started": "2026-09-18T12:41:18.463Z",
+    "finished": "2026-09-18T12:41:49.003Z"
+  },
+  "deployment": {
+    "version": 1,
+    "deployment_state_capture": "deployed-version.jpg",
+    "public_captures": [
+      "records-http.png",
+      "records-status-http.png"
+    ]
+  },
+  "http": {
+    "get_status": 200,
+    "get_exposes_records": false,
+    "post_acknowledgements": 12,
+    "access_acknowledged": 3,
+    "access_duplicate_acknowledged": 3,
+    "result_acknowledged": 3,
+    "result_duplicate_acknowledged": 3
+  },
+  "scenarios": [
+    {
+      "name": "original",
+      "prompt_treatment": "original",
+      "download_status": "succeeded",
+      "access_duplicate": true,
+      "result_duplicate": true,
+      "clone_attempts": 1,
+      "guidance_read_before_clone": true
+    },
+    {
+      "name": "anonymized",
+      "prompt_treatment": "anonymized",
+      "download_status": "succeeded",
+      "access_duplicate": true,
+      "result_duplicate": true,
+      "clone_attempts": 1,
+      "guidance_read_before_clone": true
+    },
+    {
+      "name": "failed_clone",
+      "prompt_treatment": "original",
+      "download_status": "failed",
+      "access_duplicate": true,
+      "result_duplicate": true,
+      "clone_attempts": 1,
+      "guidance_read_before_clone": true
+    }
+  ],
+  "sheet_readback": {
+    "source": "demo",
+    "access_requests": 11,
+    "downloads_succeeded": 2,
+    "downloads_failed": 1,
+    "awaiting_result": 8,
+    "anonymized_prompts": 1,
+    "rows_per_http_scenario": 1,
+    "native_pending_receipts_preserved": 8
+  },
+  "feedback_relay": {
+    "after_observed_use": true,
+    "synthetic_message_printed": true,
+    "user_response": false,
+    "feedback_collection": false,
+    "social_action_performed": false
+  },
+  "limits": [
+    "The repository was a synthetic local Git fixture, not a GitHub download.",
+    "The scenarios are synthetic; no customer prompt or customer feedback is represented.",
+    "The anonymized prompt was prewritten; this run does not measure anonymization quality.",
+    "The sheet readback is independent API evidence supplied by the operator; the public package does not include private IDs, endpoint, keys, or raw state files."
+  ]
+}
