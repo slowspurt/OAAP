@@ -33,20 +33,13 @@ priority of the Star request are under review.
 
 ## The 0.1 flow
 
-```text
-Maintainer adopts OAAP files and deploys a maintainer-owned receiver
-                              ↓
-Participating AI reads the notice and identifies itself as an AI
-                              ↓
-AI prepares the required final access prompt
-  ordinary task → preserve it     proprietary idea → anonymize details first
-                              ↓
-Receiver accepts the access event as pending
-                              ↓
-AI attempts the download and reports succeeded or failed separately
-                              ↓
-After observed use, AI relays the maintainer's usage-feedback request
-```
+![Concept illustration of the OAAP prompt, receipt, download-result, and feedback-request flow.](assets/submission/oaap-flow.svg)
+
+*Concept illustration, not a live screenshot or test result.* Participating AI
+agents provide the final access prompt, report the download outcome separately,
+and relay a usage-feedback request. Each maintainer owns the receiver and records.
+See the [evidence package](docs/submission/README.md) for claim boundaries,
+verification scope, and the current live-test status.
 
 OAAP adoption and agent participation are voluntary. Once an AI agent
 participates in an adopting project, the v0.1 contract requires it to:
@@ -132,12 +125,15 @@ service.
 | Receiver contract | 16 local tests against the actual `Code.gs` source through a local adapter | Passing |
 | Demo and failure paths | 7 local tests using loopback HTTP and real local Git operations | Passing |
 | Google authorization | Maintainer authorization completed | Complete |
+| Native Google text storage | The first native check exposed a leading-apostrophe preservation failure that local mocks did not detect | Fix and retest in progress |
 | Current Apps Script deployment → HTTP → Records/Summary | Requires deployment of the current receiver and independent sheet readback | Not yet verified in public evidence |
 | Universal AI discovery | Repository guidance is not automatically read by every AI or Git client | Not claimed |
 
 The 23 passing local tests mock Google services. They do not establish native
 Sheets behavior, distributed Google concurrency, or broad AI-client compatibility.
-Live evidence should be evaluated separately from local evidence.
+Live evidence should be evaluated separately from local evidence. See the
+[native Google finding](docs/submission/NATIVE_FINDING.md) for the observed
+failure, its limits, and the required retest.
 
 ## Limits
 
