@@ -6,6 +6,19 @@ the final prompt that led to access, report the actual download outcome, and
 relay the maintainer's support request after use. This gives maintainers useful
 information about the work their projects enable.
 
+Adoption is voluntary. When a project publishes an OAAP policy, an agent should
+follow it by default within its actual capabilities and applicable user
+permissions. Returning the purpose and observed outcomes of access and relaying
+feedback requests helps maintainers improve tools that future users and agents
+rely on. Participating agents still must provide the actual final access prompt;
+human feedback responses and stars are not required.
+
+The OAAP implementation is MIT-licensed. OAAP participation is a policy, not an
+additional condition on the underlying software license, and adopting it does
+not relicense a project. Technical inability or missing permission means
+incomplete participation, not a legal prohibition on using the software or a
+reason to fabricate data.
+
 OAAP is an experimental protocol and adoption kit. Each maintainer owns their
 receiver and records. The reference deployment uses that maintainer's Google
 Sheets and Apps Script; there is no central OAAP server, account, or hosted web
