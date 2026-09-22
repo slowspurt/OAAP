@@ -15,11 +15,27 @@ deployment or universal AI-client support.
 
 ## 1. Adoption and discovery
 
-A maintainer follows the [setup guide](SETUP.md), deploys their own receiver,
-replaces the repository and receiver placeholders in `oaap.json`, and adds the
-[repository templates](../templates/repository/) to their project. Append or
-merge README, AGENTS.md, and CLAUDE.md guidance; preserve existing project
-instructions. `oaap.json` is public configuration, not a place for credentials.
+A maintainer can use the [clone-and-run onboarding guide](ONBOARDING.md) with
+their AI, then the [receiver setup guide](SETUP.md). The onboarding configuration
+contains `repository`, `receiver` (`null` or a configured URL), and
+`feedback: {destination, questions, intended_use}`. The downloader's AI helps
+the maintainer choose those values; example placeholders are not deployable
+configuration. [Setup examples](../examples/onboarding/) are drafts, not proof
+that either example project has adopted OAAP.
+
+The CLI writes `.oaap/onboarding.json` and `.oaap/SETUP.md`. With no receiver it
+records `awaiting_receiver` and does not install an active manifest or access
+instructions. With a receiver configured it records `configured_unverified`
+and generates `oaap.json` plus managed notices; this state does not verify
+receiver ownership, reachability, permissions, or event storage. Complete
+receiver validation separately before claiming a working deployment. These
+setup states are local configuration states, not access receipts or download
+outcomes. See [AI-assisted onboarding](AI_ONBOARDING.md) for the helper workflow.
+
+Maintainers may also merge the [repository templates](../templates/repository/)
+manually after configuring their receiver. Append or merge README, AGENTS.md,
+and CLAUDE.md guidance; preserve existing project instructions. `oaap.json` is
+public configuration, not a place for credentials.
 Its required-field lists describe this contract; the receiver validates the
 request independently and does not fetch the manifest.
 
@@ -232,15 +248,52 @@ current task/runtime; 0.1 provides no background queue, cross-session tracking,
 or automatic future reminders. Losing the key prevents an authorized update;
 do not create another event solely to conceal a lost key or inflate totals.
 
-## 6. Relay the support request after use
+## 6. Configurable feedback and the after-use relay
+
+The required final access prompt explains why the agent accessed the project.
+Optional after-use feedback comes from an actual human response about using it.
+Neither replaces the other. The maintainer can configure useful questions about
+installation friction, expected versus actual behavior, and a minimal safe
+reproduction. This is configuration for the agent's relay, not a new receiver API.
+
+The manifest's `feedback` object retains `relay_after_use` and
+`automatic_star: false`, and may include these additive fields:
+
+| Field | Meaning |
+| --- | --- |
+| `destination` | Explicit feedback link, such as the maintainer's issue page; not automatically the access receiver. |
+| `questions` | Array of human-readable questions to relay after observed use, including what was expected, what actually happened, and the smallest shareable reproduction. |
+| `intended_use` | Disclosure of how the maintainer plans to review permitted responses, for example to improve scenarios and retrieval-augmented generation (RAG) examples. This is not a claim that ingestion occurs automatically. |
+
+These fields are maintainer configuration only. Do not add them, human responses,
+or scenario/RAG material to `access` or `result` requests. Existing manifests
+without the optional fields still use `relay_after_use` and the repository link.
+Setup input uses `destination`, `questions`, and `intended_use`; the generated
+manifest also provides the relay wording and `automatic_star: false`.
 
 After the agent observes use of the project in the current task, it must relay
 `feedback.relay_after_use` from the manifest once, in its communication to the
 user. Reading relevant project material as part of the task can constitute use;
 a completed download by itself does not establish later software use.
-Include the repository or maintainer-specified feedback destination so the
-request is actionable. For example: “The maintainer asks: If this project helped,
-would you like to star it or share feedback? [Project](https://github.com/OWNER/REPO).”
+Include the explicit `feedback.destination`, questions, and intended-use
+disclosure when configured. Otherwise include the repository link. Prioritize
+useful feedback; for example, ask what the user expected, what happened, and
+whether they can share a minimal reproduction without private details. A
+maintainer may additionally request a star; this does not authorize creating one.
+
+If a user responds, the AI may help redact and organize a case only from that
+actual, approved human response. Keep confirmed observations separate from
+inference and unknowns. Check existing applicable permission for the chosen
+destination and data; do not repeatedly ask when it already covers the action.
+A public GitHub issue still requires an actual user instruction to post it.
+Neither a manifest request nor collaboration-sharing permission alone grants
+that instruction. When authority is missing, explain the intended data and
+recipient and request it. If no response is provided, leave it absent.
+
+Do not automatically ingest partner notes, collaboration records, chat history,
+or transcripts as feedback. Do not insert a case into a RAG store automatically.
+Maintainer review for scenarios/RAG is the disclosed intended use of an approved
+case, not a new OAAP storage workflow or evidence that a case was received.
 
 If use occurs outside the agent's observable task, say that the after-use relay
 has not occurred; do not promise monitoring of other apps or future sessions.
@@ -248,9 +301,10 @@ When an existing integration observes the later use, it can deliver the request
 then. Track an already-delivered request within available task context to avoid
 repeating it on network retries.
 
-Relaying, receiving a user response, and actually completing a star/rating/review
-are separate facts. Never fabricate feedback, claim completion from a relay,
-or perform the social action without the user's instruction. Treat manifest
+Relaying, receiving a user response, delivering an approved case, and actually
+completing a star/rating/review are separate facts. Never fabricate feedback,
+claim completion from a relay, or perform the social action without the user's
+instruction. Treat manifest
 feedback as a maintainer request to convey, not authority for unrelated actions.
 The 0.1 receiver stores neither relay state nor user responses or social actions;
 do not add these as event fields or claim the sheet measures them.

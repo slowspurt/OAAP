@@ -1,0 +1,13 @@
+{
+  "repository": "https://github.com/slowspurt/duobrain",
+  "receiver": null,
+  "feedback": {
+    "destination": "https://github.com/slowspurt/duobrain/issues",
+    "questions": [
+      "What installation or two-person collaboration step did you try, and what response or match between collaborators did you expect?",
+      "What actually happened: was a response missing, or did the collaboration match feel awkward? Which observed step differed from your expectation?",
+      "What minimal steps reproduce the problem without sharing partner notes, private product records, or chat transcripts? What improvement would help?"
+    ],
+    "intended_use": "The maintainer will review feedback you authorize for sharing to improve collaboration scenarios and retrieval-augmented generation (RAG) examples."
+  }
+}

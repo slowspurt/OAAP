@@ -1,0 +1,13 @@
+{
+  "repository": "https://github.com/YOUR_NAME/YOUR_REPOSITORY",
+  "receiver": null,
+  "feedback": {
+    "destination": "https://github.com/YOUR_NAME/YOUR_REPOSITORY/issues",
+    "questions": [
+      "What were you trying to do, and what did you expect?",
+      "What actually happened, including installation friction or a failure?",
+      "What is the smallest reproduction you are permitted to share without private details?"
+    ],
+    "intended_use": "The maintainer will review feedback you authorize for sharing to improve usage scenarios and retrieval-augmented generation (RAG) examples."
+  }
+}

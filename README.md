@@ -86,15 +86,59 @@ service.
 
 ## Get started
 
-### For maintainers
+### Guided setup for maintainers
 
-1. Read the [setup guide](docs/SETUP.md).
+You need Node.js 22 or newer and Git. Clone OAAP, then run the local onboarding
+tool from the OAAP checkout:
+
+```sh
+git clone https://github.com/stariver1119/OAAP.git
+cd OAAP
+node scripts/onboard.mjs
+```
+
+With no configuration file, the tool interactively asks for the existing project
+folder, canonical repository URL, optional receiver, and the feedback questions,
+destination, and intended use. It shows a preview and asks before writing locally.
+You can also pass `--project` and `--config` for a repeatable non-interactive
+preview; add `--apply` only after reviewing that plan. See the
+[onboarding guide](docs/ONBOARDING.md) for the exact commands and configuration
+shape.
+
+Want help choosing useful feedback questions and protecting existing project
+instructions? Ask your current AI to follow the
+[AI-assisted onboarding guide](docs/AI_ONBOARDING.md). The CLI itself runs locally
+and does not call an AI service, deploy Google infrastructure, send prompts, post
+issues, or add feedback to a RAG system.
+
+If you do not have a receiver yet, applying the setup creates only
+`.oaap/onboarding.json` and `.oaap/SETUP.md` with state `awaiting_receiver`. It
+does **not** create an active `oaap.json` or install active repository notices.
+After you provide a receiver URL, the tool preserves existing content while
+adding managed OAAP sections to `README.md`, `AGENTS.md`, and `CLAUDE.md`, plus
+`oaap.json`; the state is `configured_unverified`, not proof of live reception.
+
+```sh
+node scripts/onboard.mjs --project /path/to/project --check
+```
+
+`--check` verifies local setup consistency only. It may succeed while
+`runtime_verified` remains `false`; follow the receiver verification guide and
+observe a real access/download/use flow before describing an adoption as live.
+
+### Complete the maintainer-owned receiver
+
+The guided setup does not automatically create or authorize Google resources.
+Each maintainer still completes the one-time receiver setup in their own account:
+
+1. Read the [maintainer setup guide](docs/SETUP.md).
 2. Download the [maintainer spreadsheet template](templates/sheets/OAAP-maintainer-template.xlsx)
    and convert it in your own Google account.
-3. Merge the [repository adoption templates](templates/repository/) into your
-   existing project instructions. Do not overwrite them.
-4. Deploy the [Apps Script receiver](receiver/Code.gs) from the maintainer's
-   account and replace all repository and receiver placeholders.
+3. Deploy the [Apps Script receiver](receiver/Code.gs) from the maintainer's
+   account and configure it for exactly one canonical repository.
+4. Put that public receiver URL into the onboarding configuration and review the
+   generated changes. The [repository templates](templates/repository/) remain
+   available for manual merge; never overwrite existing project instructions.
 5. Follow the [receiver verification guide](receiver/VERIFY.md) before changing
    reporting from synthetic `demo` events to `live` events.
 
@@ -112,17 +156,21 @@ service.
 | Path | Purpose |
 | --- | --- |
 | [`docs/PROTOCOL.md`](docs/PROTOCOL.md) | Normative 0.1 behavior and wire contract |
+| [`docs/ONBOARDING.md`](docs/ONBOARDING.md) | Clone-and-run maintainer onboarding and configuration reference |
+| [`docs/AI_ONBOARDING.md`](docs/AI_ONBOARDING.md) | Guidance for an existing AI helping a maintainer configure OAAP safely |
 | [`docs/SETUP.md`](docs/SETUP.md) | Maintainer installation and deployment steps |
+| [`examples/onboarding/`](examples/onboarding/) | Editable setup examples; not live adoption evidence |
 | [`templates/repository/`](templates/repository/) | Files to merge into an adopting repository |
 | [`templates/sheets/`](templates/sheets/) | Maintainer-owned spreadsheet template |
 | [`receiver/`](receiver/) | Apps Script receiver and verification guidance |
-| [`scripts/`](scripts/) | Explicit demo client and live-driver entry point |
+| [`scripts/`](scripts/) | Local onboarding tool, explicit demo client, and live-driver entry point |
 | [`tests/`](tests/) | Receiver-contract and local demo/E2E coverage |
 
 ## Verification status
 
 | Scope | Current evidence | Status |
 | --- | --- | --- |
+| Local onboarding tool | 30 tests cover preview/apply/check, deferred and configured states, content preservation, conflict refusal, path safety, and no network/Git subprocesses | Passing |
 | Receiver contract | 16 local tests against the actual `Code.gs` source through a local adapter | Passing |
 | Demo and failure paths | 7 local tests using loopback HTTP and real local Git operations | Passing |
 | Google authorization | Maintainer authorization completed | Complete |
@@ -130,7 +178,8 @@ service.
 | Current Apps Script deployment → HTTP → Records/Summary | Deployed version 1 accepted three synthetic access/result flows and identical retries; independent API readback reconciled 11 access, 2 succeeded, 1 failed, 8 pending, and 1 anonymized | Passed for one synthetic run |
 | Universal AI discovery | Repository guidance is not automatically read by every AI or Git client | Not claimed |
 
-The 23 passing local tests mock Google services. Native testing separately found
+The 53 passing local tests comprise 30 onboarding, 16 receiver, and 7 demo cases;
+the receiver and demo cases mock Google services. Native testing separately found
 the leading-apostrophe issue, and the corrected six-sample check passed with
 independently reviewed API values. A later deployed run used real HTTP and a
 synthetic local Git fixture: two clone scenarios succeeded, one deliberately

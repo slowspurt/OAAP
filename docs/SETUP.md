@@ -1,5 +1,10 @@
 # Maintainer setup
 
+Start with the [local onboarding tool](ONBOARDING.md) to choose your project
+and feedback settings, optionally with help from your existing AI. You can
+prepare those choices before a receiver exists. The steps below provision
+the maintainer-owned Google receiver; cloning OAAP alone does not deploy it.
+
 1. Download [OAAP-maintainer-template.xlsx](../templates/sheets/OAAP-maintainer-template.xlsx),
    upload it to your own Google Drive, open it in Google Sheets, and choose
    File → Save as Google Sheets. Keep the resulting native sheet private.
@@ -24,9 +29,13 @@
    preserve the project's existing instructions. Create a template file only
    when that file does not already exist. Review the diff before publishing.
 7. Send synthetic `demo` events and verify Records and Summary before changing
-   the Summary reporting source to `live`. The live-demo driver uses the synthetic
-   repository identity `https://github.com/example/demo`; configure a dedicated test
-   receiver for that identity. Do not relabel a real repository just to run a test.
+   the Summary reporting source to `live`. The live-demo driver defaults to
+   `https://github.com/example/demo`; set `OAAP_REPOSITORY` to the exact repository
+   configured on the receiver being tested. It still clones a synthetic local
+   fixture and sends `demo` events, even when this setting names your project.
+   Never relabel an existing receiver serving another repository to run a test.
+   Follow [the verification guide](../receiver/VERIFY.md) and independently
+   reconcile test rows before claiming that reception works.
 
 Copying a bound script does not copy its published deployment. Each maintainer
 must authorize and deploy their own copy. A standalone script must be copied
